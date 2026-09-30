@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Portfolio of a Computer Science student seeking a Software Engineer internship.">
+<meta name="theme-color" content="#0e1116">
+<title>Elfrudo Marcus Simatupang | Computer Science Student & Aspiring Software Engineer</title>
+<style>
+  :root {
+    --bg: #0e1116; --surface: #151a22; --line: #242c38;
+    --ink: #e8ecf2; --muted: #93a0b4;
+    --accent: #6ea8fe; /* the single accent colour */
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+  body { background: var(--bg); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  a { color: inherit; text-decoration: none; }
+  ul, ol { list-style: none; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  ::selection { background: #6ea8fe40; }
+  .icon { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.25rem; }
+
+  /* Navbar */
+  header { position: sticky; top: 0; z-index: 50; background: rgba(14,17,22,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  nav { display: flex; align-items: center; justify-content: space-between; height: 4rem; }
+  .logo { font-weight: 600; }
+  .nav-links { display: none; gap: 1.75rem; }
+  .nav-links a, .menu a { color: var(--muted); font-size: .9rem; transition: color .2s; }
+  .nav-links a:hover, .menu a:hover { color: var(--ink); }
+  .burger { background: none; border: 0; color: var(--muted); padding: .5rem; cursor: pointer; }
+  .burger:hover { color: var(--ink); }
+  .menu { display: none; border-top: 1px solid var(--line); padding: .5rem 0; }
+  .menu.open { display: block; }
+  .menu a { display: block; padding: .75rem 1.25rem; font-size: 1rem; }
+
+  /* Hero */
+  .hero { padding: 5rem 0 3.5rem; background: var(--surface); border-bottom: 1px solid var(--line); }
+  .hero .role { color: var(--accent); font-size: .9rem; margin-bottom: 1rem; }
+  h1 { font-size: 2.5rem; line-height: 1.1; letter-spacing: -.02em; max-width: 46rem; }
+  .hero p.intro { color: var(--muted); font-size: 1.125rem; max-width: 36rem; margin-top: 1.5rem; }
+  .buttons { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2.25rem; }
+  .btn { padding: .65rem 1.25rem; border-radius: 6px; font-size: .9rem; font-weight: 500; border: 1px solid var(--line); transition: opacity .2s, border-color .2s, color .2s; }
+  .btn.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .btn.primary:hover { opacity: .85; }
+  .btn.ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .social { display: flex; gap: .25rem; margin: 2rem 0 0 -.5rem; }
+  .social a { padding: .5rem; color: var(--muted); transition: color .2s; }
+  .social a:hover { color: var(--accent); }
+
+  /* Sections */
+  section.block { padding: 3.5rem 0; }
+  section.alt { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  h2 { font-size: 1.6rem; letter-spacing: -.01em; margin-bottom: 2rem; }
+  h3 { font-size: 1.05rem; }
+  .muted { color: var(--muted); }
+  .about p { max-width: 42rem; color: var(--muted); margin-bottom: 1rem; }
+
+  /* Skills */
+  .skills { display: grid; gap: 2rem; }
+  .skills h3 { margin-bottom: .75rem; font-weight: 500; }
+  .chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .chips li { background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: .35rem .75rem; font-size: .875rem; color: var(--muted); }
+
+  /* Projects */
+  .projects { display: grid; gap: 1.25rem; }
+  .card { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow: hidden;
+    transition: transform .3s, border-color .3s; }
+  .card:hover { transform: translateY(-4px); border-color: rgba(110,168,254,.6); }
+  .card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; object-position: top; display: block; }
+  .card-body { display: flex; flex-direction: column; flex: 1; padding: 1.25rem; }
+  .card p { flex: 1; color: var(--muted); font-size: .9rem; margin-top: .5rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+  .tags li { background: var(--bg); color: var(--accent); font-size: .75rem; padding: .2rem .5rem; border-radius: 4px; }
+  .links { display: flex; gap: 1.25rem; margin-top: 1.25rem; }
+  .links a { display: inline-flex; align-items: center; gap: .4rem; color: var(--muted); font-size: .875rem; transition: color .2s; }
+  .links a:hover { color: var(--accent); }
+  .links .icon { width: 16px; height: 16px; }
+
+  /* Timeline */
+  .timeline { border-left: 1px solid var(--line); padding-left: 1.5rem; }
+  .timeline li { position: relative; margin-bottom: 1.25rem; }
+  .timeline li::before { content: ""; position: absolute; left: -1.83rem; top: .55rem; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  .timeline p { font-size: .9rem; color: var(--muted); }
+  .timeline p.note { margin-top: .5rem; max-width: 36rem; }
+
+  /* Contact */
+  .contact-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
+  .contact-list a { display: inline-flex; align-items: center; gap: .75rem; color: var(--muted); transition: color .2s; width: fit-content; }
+  .contact-list a:hover { color: var(--accent); }
+
+  footer { border-top: 1px solid var(--line); padding: 2rem 0; }
+  footer .wrap { display: flex; flex-direction: column; gap: 1rem; }
+  footer small { display: block; color: var(--muted); font-size: .75rem; margin-top: .25rem; }
+  footer .social { margin: 0 0 0 -.5rem; }
+
+  /* Fade-in on scroll */
+  .reveal { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  .no-js .reveal { opacity: 1; transform: none; }
+
+  @media (min-width: 640px) {
+    .wrap { padding: 0 2rem; }
+    h1 { font-size: 3.75rem; }
+    .hero { padding: 7rem 0 6rem; }
+    section.block { padding: 5rem 0; }
+    h2 { font-size: 1.9rem; }
+    .skills { grid-template-columns: repeat(2, 1fr); }
+    .projects { grid-template-columns: repeat(2, 1fr); }
+    footer .wrap { flex-direction: row; justify-content: space-between; align-items: center; }
+    footer .social { margin-left: 0; }
+    .menu a { padding-left: 2rem; }
+  }
+  @media (min-width: 768px) {
+    .nav-links { display: flex; }
+    .burger, .menu { display: none !important; }
+  }
+  @media (min-width: 1024px) {
+    .skills { grid-template-columns: repeat(3, 1fr); }
+    .projects { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    * { transition-duration: .01ms !important; }
+  }
+</style>
+</head>
+<body class="no-js">
+
+<!-- Icons (reused below) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-github" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+</svg>
+
+<header>
+  <div class="wrap">
+    <nav aria-label="Main">
+      <a href="#top" class="logo">Elfrudo Marcus Simatupang</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Experience &amp; Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+        <svg class="icon" width="24" height="24"><use href="#i-menu"/></svg>
+      </button>
+    </nav>
+  </div>
+  <ul class="menu" id="menu">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Experience &amp; Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <p class="role">Computer Science Student &amp; Aspiring Software Engineer</p>
+      <h1>Hi, I'm Elfrudo Marcus Simatupang</h1>
+      <p class="intro">I'm a Computer Science student passionate about building software, learning new technologies, and solving real-world problems through code.</p>
+      <div class="buttons">
+        <a href="#projects" class="btn primary">View My Projects</a>
+        <a href="#contact" class="btn ghost">Contact Me</a>
+      </div>
+      <div class="social">
+        <a href="https://github.com/elfrudo" target="_blank" rel="noreferrer" aria-label="GitHub"><svg class="icon"><use href="#i-github"/></svg></a>
+        <a href="https://www.linkedin.com/in/elfrudo-marcus-simatupang-9b9197326/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><svg class="icon"><use href="#i-linkedin"/></svg></a>
+        <a href="mailto:elfrudomarcus@gmail.com" aria-label="Email"><svg class="icon"><use href="#i-mail"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="block reveal" id="about">
+    <div class="wrap about">
+      <h2>About</h2>
+      <p>I'm a Computer Science student interested in software engineering and building web applications.</p>
+      <p>I'm currently improving my programming and software development skills through personal projects and coursework.</p>
+      <p>I'm looking for a Software Engineer or Software Developer internship where I can contribute to a real team and keep learning.</p>
+    </div>
+  </section>
+
+  <!-- Skills: add or remove <li> items freely -->
+  <section class="block alt reveal" id="skills">
+    <div class="wrap">
+      <h2>Skills</h2>
+      <div class="skills">
+        <div>
+          <h3>Programming Languages</h3>
+          <ul class="chips"><li>JavaScript</li><li>TypeScript</li><li>Dart</li><li>Java</li><li>Python</li></ul>
+        </div>
+        <div>
+          <h3>Frameworks &amp; Technologies</h3>
+          <ul class="chips"><li>React</li><li>Flutter</li><li>Node.js</li><li>NestJS</li><li>REST API</li></ul>
+        </div>
+        <div>
+          <h3>Tools</h3>
+          <ul class="chips"><li>Git</li><li>GitHub</li><li>VS Code</li><li>Android Studio</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects: copy one <article class="card"> to add a project; delete one to remove it -->
+  <section class="block reveal" id="projects">
+    <div class="wrap">
+      <h2>Projects</h2>
+      <div class="projects">
+
+        <article class="card">
+          <img src="images/planit.png" alt="PlanIt app screenshot" loading="lazy">
+          <div class="card-body">
+            <h3>PlanIt</h3>
+            <p>An event marketplace platform that helps users discover and book venues and Event Organizers in one place.</p>
+            <ul class="tags"><li>React</li><li>TypeScript</li><li>NestJS</li><li>REST API</li></ul>
+            <div class="links">
+              <a href="https://github.com/elfrudo/Final_Project_MHS_Group11" target="_blank" rel="noreferrer"><svg class="icon"><use href="#i-github"/></svg> Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="images/noisecore.jpg" alt="Noisecore website design" loading="lazy">
+          <div class="card-body">
+            <h3>NOISECORE</h3>
+            <p>A web design project for a headphone brand, designed and prototyped in Figma.</p>
+            <ul class="tags"><li>Figma</li><li>Web Design</li><li>UI Design</li></ul>
+            <div class="links">
+              <a href="https://www.figma.com/proto/QjbHUo4oAf5hUDx8YH9SEj/Noisecore?node-id=4-7&amp;starting-point-node-id=4%3A7&amp;t=lkEknWjdDMnwH8Dw-1" target="_blank" rel="noreferrer"><svg class="icon"><use href="#i-external"/></svg> Figma prototype</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <h3>[PROJECT NAME]</h3>
+            <p>[PROJECT DESCRIPTION]</p>
+            <ul class="tags"><li>[TECHNOLOGIES]</li></ul>
+            <div class="links">
+              <a href="https://github.com/elfrudo/[REPO]" target="_blank" rel="noreferrer"><svg class="icon"><use href="#i-github"/></svg> Code</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section class="block alt reveal" id="education">
+    <div class="wrap">
+      <h2>Education</h2>
+      <ol class="timeline">
+        <li>
+          <h3>[UNIVERSITY]</h3>
+          <p>Computer Science</p>
+          <p>[START YEAR] – [GRADUATION YEAR]</p>
+          <p class="note">Studying computer science with a focus on software development.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Experience: to add a job, replace the <p> with an <ol class="timeline"> like the one above -->
+  <section class="block reveal" id="experience">
+    <div class="wrap">
+      <h2>Experience</h2>
+      <p class="muted">Currently seeking my first Software Engineering internship.</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="block alt reveal" id="contact">
+    <div class="wrap">
+      <h2>Let's Connect</h2>
+      <p class="muted" style="max-width:36rem">I'm open to Software Engineer and Software Developer internship opportunities. Send me a message and I'll get back to you.</p>
+      <div class="contact-list">
+        <a href="mailto:elfrudomarcus@gmail.com"><svg class="icon"><use href="#i-mail"/></svg> elfrudomarcus@gmail.com</a>
+        <a href="https://www.linkedin.com/in/elfrudo-marcus-simatupang-9b9197326/" target="_blank" rel="noreferrer"><svg class="icon"><use href="#i-linkedin"/></svg> LinkedIn</a>
+        <a href="https://github.com/elfrudo" target="_blank" rel="noreferrer"><svg class="icon"><use href="#i-github"/></svg> GitHub</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <strong>Elfrudo Marcus Simatupang</strong>
+      <div class="muted" style="font-size:.9rem">Computer Science Student &amp; Aspiring Software Engineer</div>
+      <small>© <span id="year">2026</span> Elfrudo Marcus Simatupang. All rights reserved.</small>
+    </div>
+    <div class="social">
+      <a href="https://github.com/elfrudo" target="_blank" rel="noreferrer" aria-label="GitHub"><svg class="icon"><use href="#i-github"/></svg></a>
+      <a href="https://www.linkedin.com/in/elfrudo-marcus-simatupang-9b9197326/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><svg class="icon"><use href="#i-linkedin"/></svg></a>
+      <a href="mailto:elfrudomarcus@gmail.com" aria-label="Email"><svg class="icon"><use href="#i-mail"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.body.classList.remove("no-js");
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Mobile menu
+  const burger = document.getElementById("burger");
+  const menu = document.getElementById("menu");
+  burger.addEventListener("click", () => {
+    const open = menu.classList.toggle("open");
+    burger.setAttribute("aria-expanded", open);
+    burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  });
+  menu.addEventListener("click", (e) => {
+    if (e.target.tagName === "A") menu.classList.remove("open");
+  });
+
+  // Fade in sections once as they enter the viewport
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (en.isIntersecting) { en.target.classList.add("visible"); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+</script>
+</body>
+</html>
