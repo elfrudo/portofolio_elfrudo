@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Portfolio of a Computer Science student seeking a Software Engineer internship.">
-<meta name="theme-color" content="#0e1116">
+<meta name="theme-color" content="#09080d">
 <title>Elfrudo Marcus Simatupang | Computer Science Student & Aspiring Software Engineer</title>
 <style>
   :root {
-    --bg: #0e1116; --surface: #151a22; --line: #242c38;
-    --ink: #e8ecf2; --muted: #93a0b4;
-    --accent: #6ea8fe; /* the single accent colour */
+    --bg: #09080d; --surface: #150f22; --line: #2a1f40;
+    --ink: #ece8f5; --muted: #a199b5;
+    --accent: #a78bfa; /* the single accent colour */
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
@@ -19,12 +19,12 @@
   a { color: inherit; text-decoration: none; }
   ul, ol { list-style: none; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
-  ::selection { background: #6ea8fe40; }
+  ::selection { background: #a78bfa40; }
   .icon { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.25rem; }
 
   /* Navbar */
-  header { position: sticky; top: 0; z-index: 50; background: rgba(14,17,22,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  header { position: sticky; top: 0; z-index: 50; background: rgba(9,8,13,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
   nav { display: flex; align-items: center; justify-content: space-between; height: 4rem; }
   .logo { font-weight: 600; }
   .nav-links { display: none; gap: 1.75rem; }
@@ -37,16 +37,18 @@
   .menu a { display: block; padding: .75rem 1.25rem; font-size: 1rem; }
 
   /* Hero */
-  .hero { padding: 5rem 0 3.5rem; background: var(--surface); border-bottom: 1px solid var(--line); }
+  .hero { min-height: calc(100vh - 4rem); min-height: calc(100svh - 4rem); display: flex; align-items: center; position: relative; padding: 3rem 0 5rem; background: var(--surface); border-bottom: 1px solid var(--line); }
   .hero .role { color: var(--accent); font-size: .9rem; margin-bottom: 1rem; }
-  h1 { font-size: 2.5rem; line-height: 1.1; letter-spacing: -.02em; max-width: 46rem; }
+  .hero .wrap { width: 100%; text-align: center; }
+  .hero h1, .hero p.intro { margin-left: auto; margin-right: auto; }
+  h1 { font-size: 2.75rem; line-height: 1.1; letter-spacing: -.02em; max-width: 46rem; }
   .hero p.intro { color: var(--muted); font-size: 1.125rem; max-width: 36rem; margin-top: 1.5rem; }
-  .buttons { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2.25rem; }
+  .buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; margin-top: 2.25rem; }
   .btn { padding: .65rem 1.25rem; border-radius: 6px; font-size: .9rem; font-weight: 500; border: 1px solid var(--line); transition: opacity .2s, border-color .2s, color .2s; }
   .btn.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
   .btn.primary:hover { opacity: .85; }
   .btn.ghost:hover { border-color: var(--accent); color: var(--accent); }
-  .social { display: flex; gap: .25rem; margin: 2rem 0 0 -.5rem; }
+  .social { display: flex; justify-content: center; gap: .25rem; margin: 2rem 0 0; }
   .social a { padding: .5rem; color: var(--muted); transition: color .2s; }
   .social a:hover { color: var(--accent); }
 
@@ -62,16 +64,28 @@
   .skills { display: grid; gap: 2rem; }
   .skills h3 { margin-bottom: .75rem; font-weight: 500; }
   .chips { display: flex; flex-wrap: wrap; gap: .5rem; }
-  .chips li { background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: .35rem .75rem; font-size: .875rem; color: var(--muted); }
+  .chips li { display: inline-flex; align-items: center; gap: .5rem; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: .35rem .75rem; font-size: .875rem; color: var(--muted); }
 
   /* Projects */
   .projects { display: grid; gap: 1.25rem; }
   .card { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow: hidden;
     transition: transform .3s, border-color .3s; }
-  .card:hover { transform: translateY(-4px); border-color: rgba(110,168,254,.6); }
+  .card:hover { transform: translateY(-4px); border-color: rgba(167,139,250,.6); }
   .card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; object-position: top; display: block; }
+  .slider { position: relative; overflow: hidden; aspect-ratio: 16/9; background: var(--bg); }
+  .track { display: flex; height: 100%; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+  .track img { flex: 0 0 100%; width: 100%; height: 100%; }
+  .slider .nav { position: absolute; top: 50%; width: 2rem; height: 2rem; margin-top: -1rem; display: grid; place-items: center; border: 0; border-radius: 50%; background: rgba(9,8,13,.65); color: var(--ink); cursor: pointer; transition: background .2s, opacity .2s; }
+  .slider .nav:hover { background: var(--accent); color: var(--bg); }
+  .slider .prev { left: .6rem; } .slider .prev .icon { transform: rotate(90deg); }
+  .slider .next { right: .6rem; } .slider .next .icon { transform: rotate(-90deg); }
+  .dots { position: absolute; left: 0; right: 0; bottom: .6rem; display: flex; justify-content: center; gap: .4rem; }
+  .dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: rgba(236,232,245,.45); cursor: pointer; transition: background .2s, transform .2s; }
+  .dots button.on { background: var(--accent); transform: scale(1.25); }
+  .slider.single .nav, .slider.single .dots { display: none; }
   .card-body { display: flex; flex-direction: column; flex: 1; padding: 1.25rem; }
   .card p { flex: 1; color: var(--muted); font-size: .9rem; margin-top: .5rem; }
+  .chips img.invert { filter: invert(1); }
   .tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
   .tags li { background: var(--bg); color: var(--accent); font-size: .75rem; padding: .2rem .5rem; border-radius: 4px; }
   .links { display: flex; gap: 1.25rem; margin-top: 1.25rem; }
@@ -80,37 +94,62 @@
   .links .icon { width: 16px; height: 16px; }
 
   /* Timeline */
-  .timeline { border-left: 1px solid var(--line); padding-left: 1.5rem; }
+  .timeline { padding-left: 1.5rem; }
   .timeline li { position: relative; margin-bottom: 1.25rem; }
   .timeline li::before { content: ""; position: absolute; left: -1.83rem; top: .55rem; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  .boxes { display: grid; gap: 1rem; }
+  .box { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 1.25rem; transition: border-color .3s; }
+  .box:hover { border-color: rgba(167,139,250,.6); }
+  .box .desc { color: var(--muted); font-size: .9rem; margin-top: .5rem; max-width: 40rem; }
+  .roles { margin-top: 1rem; display: flex; flex-direction: column; gap: .4rem; }
+  .roles li { font-size: .9rem; padding-left: 1rem; position: relative; }
+  .roles li::before { content: ""; position: absolute; left: 0; top: .6em; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+  .box .org { color: var(--accent); font-size: .8rem; margin-bottom: .4rem; }
+  .timeline li:not(:last-child)::after { content: ""; position: absolute; left: calc(-1.83rem + 3.5px); top: calc(.55rem + 8px); bottom: -1.8rem; width: 1px; background: var(--line); }
   .timeline p { font-size: .9rem; color: var(--muted); }
   .timeline p.note { margin-top: .5rem; max-width: 36rem; }
 
   /* Contact */
-  .contact-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
+  .contact-list { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-top: 1.5rem; }
+  #contact { text-align: center; }
+  #contact h2::after { margin-left: auto; margin-right: auto; }
   .contact-list a { display: inline-flex; align-items: center; gap: .75rem; color: var(--muted); transition: color .2s; width: fit-content; }
   .contact-list a:hover { color: var(--accent); }
 
-  footer { border-top: 1px solid var(--line); padding: 2rem 0; }
-  footer .wrap { display: flex; flex-direction: column; gap: 1rem; }
-  footer small { display: block; color: var(--muted); font-size: .75rem; margin-top: .25rem; }
-  footer .social { margin: 0 0 0 -.5rem; }
+  footer { border-top: 1px solid var(--line); padding: 2rem 1.25rem; text-align: center; color: var(--muted); font-size: .9rem; }
 
   /* Fade-in on scroll */
   .reveal { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
   .reveal.visible { opacity: 1; transform: none; }
   .no-js .reveal { opacity: 1; transform: none; }
 
+  /* Scroll animations */
+  #progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; z-index: 60; }
+  .scroll-hint { position: absolute; left: 50%; bottom: 1.5rem; display: flex; flex-direction: column; align-items: center; gap: .15rem; color: var(--muted); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; transform: translateX(-50%); transition: color .2s, opacity .4s; animation: rise .8s ease 1s backwards; }
+  .scroll-hint:hover { color: var(--accent); }
+  .scroll-hint .icon { animation: bob 1.6s ease-in-out infinite; }
+  .scroll-hint.hide { opacity: 0; pointer-events: none; }
+  @keyframes bob { 50% { transform: translateY(5px); } }
+  .nav-links a.active { color: var(--ink); }
+  @keyframes rise { from { opacity: 0; transform: translateY(22px) scale(.97); } }
+  .stagger > * { opacity: 0; }
+  .reveal.visible .stagger > * { opacity: 1; animation: rise .65s cubic-bezier(.2,.7,.2,1) backwards; animation-delay: calc(var(--i, 0) * 90ms); }
+  .no-js .stagger > * { opacity: 1; }
+  h2::after { content: ""; display: block; width: 0; height: 3px; border-radius: 2px; background: var(--accent); margin-top: .6rem; transition: width .8s cubic-bezier(.2,.7,.2,1) .25s; }
+  .reveal.visible h2::after, .no-js h2::after { width: 2.75rem; }
+  .hero .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) backwards; }
+  .hero .wrap > :nth-child(2) { animation-delay: .1s; }
+  .hero .wrap > :nth-child(3) { animation-delay: .2s; }
+  .hero .wrap > :nth-child(4) { animation-delay: .3s; }
+  .hero .wrap > :nth-child(5) { animation-delay: .4s; }
+
   @media (min-width: 640px) {
     .wrap { padding: 0 2rem; }
-    h1 { font-size: 3.75rem; }
-    .hero { padding: 7rem 0 6rem; }
+    h1 { font-size: 4.5rem; }
     section.block { padding: 5rem 0; }
     h2 { font-size: 1.9rem; }
     .skills { grid-template-columns: repeat(2, 1fr); }
     .projects { grid-template-columns: repeat(2, 1fr); }
-    footer .wrap { flex-direction: row; justify-content: space-between; align-items: center; }
-    footer .social { margin-left: 0; }
     .menu a { padding-left: 2rem; }
   }
   @media (min-width: 768px) {
@@ -119,22 +158,28 @@
   }
   @media (min-width: 1024px) {
     .skills { grid-template-columns: repeat(3, 1fr); }
-    .projects { grid-template-columns: repeat(3, 1fr); }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .reveal { opacity: 1; transform: none; transition: none; }
+    .stagger > * { opacity: 1 !important; animation: none !important; }
+    .hero .wrap > * { animation: none; }
+    .scroll-hint, .scroll-hint .icon { animation: none; }
+    h2::after { width: 2.75rem; transition: none; }
     * { transition-duration: .01ms !important; }
   }
 </style>
 </head>
 <body class="no-js">
+<div id="progress" aria-hidden="true"></div>
 
 <!-- Icons (reused below) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-github" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol>
   <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
   <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
   <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
 </svg>
@@ -147,7 +192,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#education">Experience &amp; Education</a></li>
+        <li><a href="#education">Education &amp; Organizations</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
@@ -159,7 +204,7 @@
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
-    <li><a href="#education">Experience &amp; Education</a></li>
+    <li><a href="#education">Education &amp; Organizations</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </header>
@@ -169,8 +214,8 @@
   <section class="hero" id="top">
     <div class="wrap">
       <p class="role">Computer Science Student &amp; Aspiring Software Engineer</p>
-      <h1>Hi, I'm Elfrudo Marcus Simatupang aa</h1>
-      <p class="intro">I'm a Computer Science student passionate about building software, learning new technologies, and solving real-world problems through code. test</p>
+      <h1>Hi, I'm Elfrudo Marcus Simatupang</h1>
+      <p class="intro">I'm a Computer Science student passionate about building software, learning new technologies, and solving real-world problems through code.</p>
       <div class="buttons">
         <a href="#projects" class="btn primary">View My Projects</a>
         <a href="#contact" class="btn ghost">Contact Me</a>
@@ -181,15 +226,16 @@
         <a href="mailto:elfrudomarcus@gmail.com" aria-label="Email"><svg class="icon"><use href="#i-mail"/></svg></a>
       </div>
     </div>
+    <a href="#about" class="scroll-hint" aria-label="Scroll down">Scroll <svg class="icon"><use href="#i-chevron"/></svg></a>
   </section>
 
   <!-- About -->
   <section class="block reveal" id="about">
     <div class="wrap about">
       <h2>About</h2>
-      <p>I'm a Computer Science student interested in software engineering and building web applications.</p>
+      <p>Hey there, I'm a 5th semester Computer Science student from Binus University. I'm interested in software engineering and building web applications.</p>
       <p>I'm currently improving my programming and software development skills through personal projects and coursework.</p>
-      <p>I'm looking for a Software Engineer or Software Developer internship where I can contribute to a real team and keep learning.</p>
+      <p>I'm mainly looking for a Software Engineer internship, but I'm open to other opportunities where I can contribute to a real team and keep learning.</p>
     </div>
   </section>
 
@@ -197,18 +243,18 @@
   <section class="block alt reveal" id="skills">
     <div class="wrap">
       <h2>Skills</h2>
-      <div class="skills">
+      <div class="stagger skills">
         <div>
           <h3>Programming Languages</h3>
-          <ul class="chips"><li>JavaScript</li><li>TypeScript</li><li>Dart</li><li>Java</li><li>Python</li></ul>
+          <ul class="stagger chips"><li><img src="images/skills/javascript.svg" alt="" width="16" height="16" loading="lazy">JavaScript</li><li><img src="images/skills/typescript.svg" alt="" width="16" height="16" loading="lazy">TypeScript</li><li><img src="images/skills/dart.svg" alt="" width="16" height="16" loading="lazy">Dart</li><li><img src="images/skills/java.svg" alt="" width="16" height="16" loading="lazy">Java</li><li><img src="images/skills/python.svg" alt="" width="16" height="16" loading="lazy">Python</li></ul>
         </div>
         <div>
           <h3>Frameworks &amp; Technologies</h3>
-          <ul class="chips"><li>React</li><li>Flutter</li><li>Node.js</li><li>NestJS</li><li>REST API</li></ul>
+          <ul class="stagger chips"><li><img src="images/skills/react.svg" alt="" width="16" height="16" loading="lazy">React</li><li><img src="images/skills/flutter.svg" alt="" width="16" height="16" loading="lazy">Flutter</li><li><img src="images/skills/nodejs.svg" alt="" width="16" height="16" loading="lazy">Node.js</li><li><img src="images/skills/nestjs.svg" alt="" width="16" height="16" loading="lazy">NestJS</li><li><svg class="icon" width="16" height="16"><use href="#i-code"/></svg>REST API</li></ul>
         </div>
         <div>
           <h3>Tools</h3>
-          <ul class="chips"><li>Git</li><li>GitHub</li><li>VS Code</li><li>Android Studio</li></ul>
+          <ul class="stagger chips"><li><img src="images/skills/git.svg" alt="" width="16" height="16" loading="lazy">Git</li><li><img src="images/skills/github.svg" alt="" width="16" height="16" loading="lazy" class="invert">GitHub</li><li><img src="images/skills/vscode.svg" alt="" width="16" height="16" loading="lazy">VS Code</li><li><img src="images/skills/androidstudio.svg" alt="" width="16" height="16" loading="lazy">Android Studio</li></ul>
         </div>
       </div>
     </div>
@@ -218,10 +264,15 @@
   <section class="block reveal" id="projects">
     <div class="wrap">
       <h2>Projects</h2>
-      <div class="projects">
+      <div class="stagger projects">
 
         <article class="card">
-          <img src="Screenshot 2026-09-30 220207.png" alt="PlanIt app screenshot" loading="lazy">
+          <div class="slider">
+            <div class="track"><img src="Screenshot 2026-09-30 220207.png" alt="PlanIt screenshot 1"><img src="Screenshot 2026-10-01 103547.png" alt="PlanIt screenshot 2"><img src="Screenshot 2026-10-01 103635.png" alt="PlanIt screenshot 3"></div>
+            <button class="nav prev" aria-label="Previous image"><svg class="icon"><use href="#i-chevron"/></svg></button>
+            <button class="nav next" aria-label="Next image"><svg class="icon"><use href="#i-chevron"/></svg></button>
+            <div class="dots"></div>
+          </div>
           <div class="card-body">
             <h3>PlanIt</h3>
             <p>An event marketplace platform that helps users discover and book venues and Event Organizers in one place.</p>
@@ -233,24 +284,18 @@
         </article>
 
         <article class="card">
-          <img src="Screenshot 2026-09-30 215939.png" alt="Noisecore website design" loading="lazy">
+          <div class="slider">
+            <div class="track"><img src="Screenshot 2026-09-30 215939.png" alt="NOISECORE screenshot 1"><img src="Screenshot 2026-10-01 103947.png" alt="NOISECORE screenshot 2"><img src="Screenshot 2026-10-01 104010.png" alt="NOISECORE screenshot 3"></div>
+            <button class="nav prev" aria-label="Previous image"><svg class="icon"><use href="#i-chevron"/></svg></button>
+            <button class="nav next" aria-label="Next image"><svg class="icon"><use href="#i-chevron"/></svg></button>
+            <div class="dots"></div>
+          </div>
           <div class="card-body">
             <h3>NOISECORE</h3>
             <p>A web design project for a headphone brand, designed and prototyped in Figma.</p>
             <ul class="tags"><li>Figma</li><li>Web Design</li><li>UI Design</li></ul>
             <div class="links">
               <a href="https://www.figma.com/proto/QjbHUo4oAf5hUDx8YH9SEj/Noisecore?node-id=4-7&amp;starting-point-node-id=4%3A7&amp;t=lkEknWjdDMnwH8Dw-1" target="_blank" rel="noreferrer"><svg class="icon"><use href="#i-external"/></svg> Figma prototype</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-body">
-            <h3>[PROJECT NAME]</h3>
-            <p>[PROJECT DESCRIPTION]</p>
-            <ul class="tags"><li>[TECHNOLOGIES]</li></ul>
-            <div class="links">
-              <a href="https://github.com/elfrudo/[REPO]" target="_blank" rel="noreferrer"><svg class="icon"><use href="#i-github"/></svg> Code</a>
             </div>
           </div>
         </article>
@@ -263,22 +308,35 @@
   <section class="block alt reveal" id="education">
     <div class="wrap">
       <h2>Education</h2>
-      <ol class="timeline">
+      <ol class="stagger timeline">
         <li>
-          <h3>[UNIVERSITY]</h3>
-          <p>Computer Science</p>
-          <p>[START YEAR] – [GRADUATION YEAR]</p>
-          <p class="note">Studying computer science with a focus on software development.</p>
+          <h3>Binus University</h3>
+          <p>Computer Science - Software Engineering</p>
+          <p>2024 – Present</p>
+        </li>
+        <li>
+          <h3>Athalia School</h3>
+          <p>2012 – 2024</p>
         </li>
       </ol>
     </div>
   </section>
 
-  <!-- Experience: to add a job, replace the <p> with an <ol class="timeline"> like the one above -->
-  <section class="block reveal" id="experience">
+  <!-- Organization Experience: copy a <div class="box"> to add another role -->
+  <section class="block reveal" id="organization">
     <div class="wrap">
-      <h2>Experience</h2>
-      <p class="muted">Currently seeking my first Software Engineering internship.</p>
+      <h2>Organization Experience</h2>
+      <div class="stagger boxes">
+        <div class="box">
+          <p class="org">2025</p>
+          <h3>HIMTI</h3>
+          <p class="desc">A student organization at Binus University, where I contributed to community activities and sponsorship for the HISHOT 2025 event.</p>
+          <ul class="roles">
+            <li>Activist of HIMTI CARE</li>
+            <li>Vice Coordinator of the Sponsor Division of HISHOT 2025</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -286,9 +344,8 @@
   <section class="block alt reveal" id="contact">
     <div class="wrap">
       <h2>Let's Connect</h2>
-      <p class="muted" style="max-width:36rem">I'm open to Software Engineer and Software Developer internship opportunities. Send me a message and I'll get back to you.</p>
-      <div class="contact-list">
-        <a href="mailto:elfrudomarcus@gmail.com"><svg class="icon"><use href="#i-mail"/></svg> elfrudomarcus@gmail.com</a>
+      <div class="stagger contact-list">
+        <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=elfrudomarcus@gmail.com" target="_blank" rel="noreferrer"><svg class="icon"><use href="#i-mail"/></svg> elfrudomarcus@gmail.com</a>
         <a href="https://www.linkedin.com/in/elfrudo-marcus-simatupang-9b9197326/" target="_blank" rel="noreferrer"><svg class="icon"><use href="#i-linkedin"/></svg> LinkedIn</a>
         <a href="https://github.com/elfrudo" target="_blank" rel="noreferrer"><svg class="icon"><use href="#i-github"/></svg> GitHub</a>
       </div>
@@ -297,23 +354,11 @@
 </main>
 
 <footer>
-  <div class="wrap">
-    <div>
-      <strong>Elfrudo Marcus Simatupang</strong>
-      <div class="muted" style="font-size:.9rem">Computer Science Student &amp; Aspiring Software Engineer</div>
-      <small>© <span id="year">2026</span> Elfrudo Marcus Simatupang. All rights reserved.</small>
-    </div>
-    <div class="social">
-      <a href="https://github.com/elfrudo" target="_blank" rel="noreferrer" aria-label="GitHub"><svg class="icon"><use href="#i-github"/></svg></a>
-      <a href="https://www.linkedin.com/in/elfrudo-marcus-simatupang-9b9197326/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><svg class="icon"><use href="#i-linkedin"/></svg></a>
-      <a href="mailto:elfrudomarcus@gmail.com" aria-label="Email"><svg class="icon"><use href="#i-mail"/></svg></a>
-    </div>
-  </div>
+  <p>Designed &amp; built by Elfrudo Marcus Simatupang</p>
 </footer>
 
 <script>
   document.body.classList.remove("no-js");
-  document.getElementById("year").textContent = new Date().getFullYear();
 
   // Mobile menu
   const burger = document.getElementById("burger");
@@ -327,10 +372,71 @@
     if (e.target.tagName === "A") menu.classList.remove("open");
   });
 
-  // Fade in sections once as they enter the viewport
+  // Stagger index for children, scroll progress bar, active nav link
+  document.querySelectorAll(".stagger").forEach((p) => [...p.children].forEach((c, i) => c.style.setProperty("--i", i)));
+  const bar = document.getElementById("progress");
+  const links = [...document.querySelectorAll(".nav-links a")];
+  const spy = [...document.querySelectorAll("main section[id]")];
+  let ticking = false;
+  function onScroll() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = "scaleX(" + (max > 0 ? scrollY / max : 0) + ")";
+    let cur = "";
+    spy.forEach((sec) => { if (sec.getBoundingClientRect().top <= 120) cur = sec.id; });
+    if (cur === "organization") cur = "education";
+    links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + cur));
+    document.querySelector(".scroll-hint").classList.toggle("hide", scrollY > 60);
+    ticking = false;
+  }
+  addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  onScroll();
+
+  // Image sliders: slides whose image file is missing are dropped automatically
+  document.querySelectorAll(".slider").forEach((sl) => {
+    const track = sl.querySelector(".track"), dots = sl.querySelector(".dots");
+    let i = 0;
+    const slides = () => [...track.querySelectorAll("img")];
+    function go(n) {
+      const len = slides().length;
+      i = (n + len) % len;
+      track.style.transform = "translateX(" + -i * 100 + "%)";
+      [...dots.children].forEach((d, k) => d.classList.toggle("on", k === i));
+    }
+    function update() {
+      const len = slides().length;
+      sl.classList.toggle("single", len < 2);
+      dots.innerHTML = "";
+      for (let k = 0; k < len; k++) {
+        const b = document.createElement("button");
+        b.setAttribute("aria-label", "Show image " + (k + 1));
+        b.onclick = () => go(k);
+        dots.appendChild(b);
+      }
+      go(Math.min(i, len - 1));
+    }
+    slides().forEach((img) => {
+      const drop = () => { img.remove(); update(); };
+      if (img.complete && !img.naturalWidth) drop();
+      else img.addEventListener("error", drop);
+    });
+    sl.querySelector(".prev").onclick = () => go(i - 1);
+    sl.querySelector(".next").onclick = () => go(i + 1);
+    let x0 = null;
+    sl.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+    sl.addEventListener("touchend", (e) => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 40) go(i + (dx < 0 ? 1 : -1));
+      x0 = null;
+    });
+    update();
+  });
+
+  // Sections animate in when they enter view, and rewind when scrolled back below the viewport
   const io = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
-      if (en.isIntersecting) { en.target.classList.add("visible"); io.unobserve(en.target); }
+      if (en.isIntersecting) en.target.classList.add("visible");
+      else if (en.boundingClientRect.top > 0) en.target.classList.remove("visible");
     });
   }, { threshold: 0.1 });
   document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
